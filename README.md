@@ -1,6 +1,6 @@
 # rewind.nvim
 
-A Neovim plugin that provides a telescope interface for browsing and restoring file versions using the [Rewind](https://github.com/rewind-ai/rewind) CLI tool.
+A Neovim plugin that provides a telescope interface for browsing and restoring file versions using the [Rewind](https://github.com/davenicholson-xyz/rewind) CLI tool.
 
 ## Features
 
@@ -11,8 +11,7 @@ A Neovim plugin that provides a telescope interface for browsing and restoring f
 
 ## Prerequisites
 
-- [Rewind CLI](https://github.com/rewind-ai/rewind) installed and configured
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) installed
+- [Rewind CLI](https://github.com/davenicholson-xyz/rewind) installed and configured
 - Must be inside a Rewind-tracked directory
 
 ## Installation
@@ -21,7 +20,7 @@ A Neovim plugin that provides a telescope interface for browsing and restoring f
 
 ```lua
 {
-  "your-username/rewind.nvim",
+  "davenicholson-xyz/rewind.nvim",
   dependencies = { "nvim-telescope/telescope.nvim" },
   config = function()
     require("rewind").setup()
@@ -33,7 +32,7 @@ A Neovim plugin that provides a telescope interface for browsing and restoring f
 
 ```lua
 use {
-  "your-username/rewind.nvim",
+  "davenicholson-xyz/rewind.nvim",
   requires = { "nvim-telescope/telescope.nvim" },
   config = function()
     require("rewind").setup()
@@ -63,11 +62,3 @@ vim.keymap.set("n", "<leader>rt", ":RewindTag<CR>", { desc = "Browse tagged vers
 - **Preview**: File content is automatically previewed
 - **Select**: Press `<Enter>` to restore the selected version
 - **Cancel**: Press `<Esc>` or `<C-c>` to cancel
-
-## How It Works
-
-The plugin uses `rewind rollback <filename> -j` to fetch version history and presents it through telescope's picker interface. When you select a version, it runs `rewind rollback <filename> -v <version>` to restore the file.
-
-## License
-
-MIT
