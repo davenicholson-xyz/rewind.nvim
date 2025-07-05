@@ -63,7 +63,12 @@ M.Rewind = function(opts)
   local result = handle:read("*a")
   handle:close()
 
-  local parsed = vim.json.decode(result)
+  local ok, parsed = pcall(vim.json.decode, result)
+  if not ok or not parsed or not parsed.versions or #parsed.versions == 0 then
+    print("No versions found for " .. filename .. " in the database")
+    return
+  end
+  
   local versions = parsed.versions
 
   pickers.new(opts, {
@@ -152,7 +157,12 @@ M.RewindTag = function(opts)
   local result = handle:read("*a")
   handle:close()
 
-  local parsed = vim.json.decode(result)
+  local ok, parsed = pcall(vim.json.decode, result)
+  if not ok or not parsed or not parsed.versions or #parsed.versions == 0 then
+    print("No versions found for " .. filename .. " in the database")
+    return
+  end
+  
   local versions = parsed.versions
 
   local tagged_versions = {}
