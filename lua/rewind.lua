@@ -59,7 +59,7 @@ M.Rewind = function(opts)
 
   local filename = vim.fn.expand('%:t')
 
-  local handle = io.popen("rewind rollback " .. filename .. " -j")
+  local handle = io.popen("rewind rollback " .. vim.fn.shellescape(filename) .. " -j")
   local result = handle:read("*a")
   handle:close()
 
@@ -93,7 +93,7 @@ M.Rewind = function(opts)
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
 
-        local cmd = string.format("rewind rollback %s -v %s", filename, selection.value.version)
+        local cmd = string.format("rewind rollback %s -v %s", vim.fn.shellescape(filename), selection.value.version)
         vim.fn.system(cmd)
         print("Rolled back " .. filename .. " to version " .. selection.value.version)
       end)
@@ -153,7 +153,7 @@ M.RewindTag = function(opts)
 
   local filename = vim.fn.expand('%:t')
 
-  local handle = io.popen("rewind rollback " .. filename .. " -j")
+  local handle = io.popen("rewind rollback " .. vim.fn.shellescape(filename) .. " -j")
   local result = handle:read("*a")
   handle:close()
 
@@ -199,7 +199,7 @@ M.RewindTag = function(opts)
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
 
-        local cmd = string.format("rewind rollback %s -v %s", filename, selection.value.version)
+        local cmd = string.format("rewind rollback %s -v %s", vim.fn.shellescape(filename), selection.value.version)
         vim.fn.system(cmd)
         print("Rolled back " .. filename .. " to tag '" .. selection.value.tags[1] .. "' (version " .. selection.value.version .. ")")
       end)
